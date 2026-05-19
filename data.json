@@ -1,0 +1,94 @@
+{
+  "journal": {
+    "nomJournal": "Entrepreneurial Success News",
+    "logo": "assets/images/logo.svg",
+    "phraseAccroche": "Votre source d'inspiration et d'informations sur le succès entrepreneurial",
+    "texteAppelAction": "Abonnez-vous pour recevoir notre newsletter et découvrir les clés du succès entrepreneurial !",
+    "articlePrincipal": {
+      "titre": "Les histoires inspirantes des entrepreneurs qui ont réussi contre vents et marées",
+      "description": "Découvrez les parcours, les défis et les stratégies des entrepreneurs à succès.",
+      "date": "25 Avril 2024",
+      "theme": "Succès entrepreneurial",
+      "image": "assets/images/image1.png"
+    },
+    "articles": [
+      {
+        "titre": "Conseils d'experts : comment démarrer et faire prospérer votre entreprise",
+        "date": "20 Avril 2024",
+        "theme": "Démarrage d'entreprise",
+        "image": "assets/images/image2.png",
+        "popularite": 68
+      },
+      {
+        "titre": "Entretien avec un fondateur : le chemin vers le succès dans le monde de la technologie",
+        "date": "15 Avril 2024",
+        "theme": "Technologie",
+        "image": "assets/images/image3.jpg",
+        "popularite": 61
+      },
+      {
+        "titre": "Top 10 des livres incontournables pour les entrepreneurs ambitieux",
+        "date": "5 Avril 2024",
+        "theme": "Lecture recommandée",
+        "image": "assets/images/image4.jpg",
+        "popularite": 58
+      },
+      {
+        "titre": "Analyse : les tendances entrepreneuriales à surveiller en 2024",
+        "date": "28 Mars 2024",
+        "theme": "Tendances",
+        "image": "assets/images/image2.png",
+        "popularite": 98
+      },
+      {
+        "titre": "Les dernières nouvelles sur les startups les plus prometteuses",
+        "date": "20 Mars 2024",
+        "theme": "Startups",
+        "image": "assets/images/image3.jpg",
+        "popularite": 12
+      }
+    ],
+    "themes": [
+      {
+        "nom": "Démarrage d'entreprise",
+        "description": "Conseils pratiques, ressources et études de cas pour les entrepreneurs en herbe qui souhaitent lancer leur propre entreprise."
+      },
+      {
+        "nom": "Technologie",
+        "description": "Actualités, analyses et entretiens avec des entrepreneurs à succès dans le domaine de la technologie et de l'innovation."
+      },
+      {
+        "nom": "Lecture recommandée",
+        "description": "Recommandations de livres et de ressources pour les entrepreneurs désireux d'en apprendre davantage et de s'inspirer de la réussite des autres."
+      },
+      {
+        "nom": "Tendances",
+        "description": "Analyses des tendances émergentes dans le monde de l'entrepreneuriat, y compris les nouvelles industries, les modèles commerciaux innovants et les opportunités à saisir."
+      },
+      {
+        "nom": "Startups",
+        "description": "Découvrez les startups les plus prometteuses, leurs histoires, leurs produits et leurs fondateurs, ainsi que les dernières nouvelles sur leur croissance et leur succès."
+      }
+    ],
+    "auteurs": [
+      {
+        "prenom": "Sophie",
+        "typeExperience": "Entrepreneure à succès",
+        "presentation": "En tant qu'entrepreneure à succès, je partage mes conseils et mes expériences pour inspirer d'autres entrepreneurs à atteindre leurs objectifs.",
+        "photo": "assets/images/image2.png"
+      },
+      {
+        "prenom": "Antoine",
+        "typeExperience": "Expert en technologie et innovation",
+        "presentation": "Avec une expertise dans la technologie et l'innovation, je vous offre des analyses approfondies sur les tendances entrepreneuriales et les opportunités de croissance.",
+        "photo": "assets/images/image3.jpg"
+      },
+      {
+        "prenom": "Marie",
+        "typeExperience": "Rédactrice en chef spécialisée en entrepreneuriat",
+        "presentation": "En tant que rédactrice en chef, je suis passionnée par l'entrepreneuriat et je vous apporte les dernières nouvelles, les conseils pratiques et les histoires inspirantes pour stimuler votre succès entrepreneurial.",
+        "photo": "assets/images/image4.jpg"
+      }
+    ]
+  }
+}
