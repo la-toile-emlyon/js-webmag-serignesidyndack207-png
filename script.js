@@ -12,11 +12,14 @@ function getData() {
       
 
       // TODO 1: REMPLIR LE HEADER
+
       let nomJournal = document.getElementById('nom-journal');
       nomJournal.textContent = data.journal.nomJournal ;
       let phraseAccroche = document.getElementById('phrase-accroche');
       phraseAccroche.textContent = data.journal.phraseAccroche ;
+
       // TODO 2: REMPLIR LA NAVIGATION
+
       let themes = data.journal.themes;
       let themesNav = document.getElementById("themes-nav");
       let btnTous = document.createElement("button");
@@ -31,7 +34,7 @@ function getData() {
       themesNav.appendChild(btn);
 
     });
-      // TODO 3: REMPLIR L'ARTICLE PRINCIPAL
+    
       // TODO 3: REMPLIR L'ARTICLE PRINCIPAL
 
 let articlePrincipal = data.journal.articlePrincipal;
@@ -66,8 +69,9 @@ articlePrincipalElement.innerHTML = `
       let titre = article.titre;
       let date = article.date;
       let badgeTheme = article.theme;
+      
 
-      let card = `<div id="articles-grid" class="articles-grid">
+      let card = `<div id="articles-grid" class="article-card">
             <img src="${image}" alt="">
             <span class="badge-theme">${badgeTheme}</span>
             <h3>${titre}</h3>
@@ -78,11 +82,50 @@ articlePrincipalElement.innerHTML = `
       });
 
       // TODO 5: REMPLIR LES THEMES
+      let themesList = document.getElementById('themes-list');
+      
+
+      themes.forEach(theme => {
+        let nom = theme.nom;
+        let description = theme.description;
+        let card = `<div id="themes-list" class="theme-item">
+            <h3>${theme.nom}</h3>
+            <p>${theme.description}</p>
+         </div>`;
+        
+        themesList.insertAdjacentHTML('beforeend', card);
+      });
 
       // TODO 6: REMPLIR LES AUTEURS
+        let authorsList = document.querySelector(".authors-list");
+        let auteurs = data.journal.auteurs;
+       
+        auteurs.forEach(auteur => {
+        let photo = auteur.photo;
+        let prenom = auteur.prenom;
+        let typeExperience = auteur.typeExperience;
+        let presentation = auteur.presentation;
+        let card = `<div class="author-card">
+            <img class="author-image" src="${photo}" alt="">
+            <h3>${prenom}</h3>
+            <h3>${typeExperience}</h3>
+            <p>${presentation}</p>
+         </div>`;
+         authorsList.insertAdjacentHTML("beforeend" , card);
+        });
 
       // TODO 7: REMPLIR LE CALL TO ACTION
+        // TODO 7: REMPLIR LE CALL TO ACTION
+let txtAppelAction = document.getElementById('call-to-action');
+txtAppelAction.innerHTML = `<p>${data.journal.texteAppelAction}</p>`;
 
+
+let btnCta = document.createElement("button");
+btnCta.textContent = "S'abonner";
+btnCta.classList.add("cta-button", "active");
+
+txtAppelAction.appendChild(btnCta);
+      
       /// FIN DU CODE
 
       // BONUS 1 : Alert sur le bouton CTA
