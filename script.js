@@ -16,7 +16,7 @@ async function getImage(theme) {
       { headers: { Authorization: `Client-ID ${UNSPLASH_KEY}` } }
     );
     const data = await res.json();
-    return data.results[0]?.urls?.regular || 'assets/images/image1.png';
+    return data.results?.[0]?.urls?.regular || 'assets/images/image1.png';
   } catch {
     return 'assets/images/image1.png';
   }
@@ -28,12 +28,21 @@ async function getNewsArticles(theme) {
     const res = await fetch(
       `https://newsapi.org/v2/everything?q=${encodeURIComponent(theme)}&language=fr&sortBy=publishedAt&pageSize=5&apiKey=${NEWS_KEY}`
     );
+
     const data = await res.json();
+    console.log(data);
+
+    // ✔ FIX IMPORTANT : sécurité API
+    if (!data || data.status !== "ok") {
+      return [];
+    }
+
     return data.articles || [];
   } catch {
     return [];
   }
 }
+
 
 // =============================================
 // CHARGEMENT DES DONNÉES
@@ -57,12 +66,14 @@ async function getData() {
 
     let nomJournal = document.getElementById('nom-journal');
     nomJournal.textContent = data.journal.nomJournal;
+
     let phraseAccroche = document.getElementById('phrase-accroche');
     phraseAccroche.textContent = data.journal.phraseAccroche;
 
     // TODO 2: REMPLIR LA NAVIGATION
     let themes = data.journal.themes;
     let themesNav = document.getElementById("themes-nav");
+
     let btnTous = document.createElement("button");
     btnTous.textContent = "Tous";
     btnTous.classList.add("nav-theme-btn", "active");
@@ -97,11 +108,19 @@ async function getData() {
       let newsArticles = await getNewsArticles(theme.nom);
 
       for (const article of newsArticles) {
-        let imgUrl = article.urlToImage || await getImage(theme.nom);
 
-        let date = new Date(article.publishedAt).toLocaleDateString('fr-FR', {
-          day: 'numeric', month: 'long', year: 'numeric'
-        });
+        // ✔ FIX IMAGE SAFE (sans changer logique)
+        let imgUrl = (article.urlToImage && article.urlToImage !== "")
+          ? article.urlToImage
+          : await getImage(theme.nom);
+
+        let date = article.publishedAt
+          ? new Date(article.publishedAt).toLocaleDateString('fr-FR', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric'
+            })
+          : "";
 
         let card = `<div class="article-card"> 
           <img src="${imgUrl}" alt="${article.title}">
@@ -158,20 +177,24 @@ async function getData() {
     // BONUS 2 : Filtrage par thème
     document.querySelectorAll("#themes-nav .nav-theme-btn").forEach(btn => {
       btn.addEventListener("click", () => {
-        document.querySelectorAll("#themes-nav .nav-theme-btn").forEach(b => b.classList.remove("active"));
+
+        document.querySelectorAll("#themes-nav .nav-theme-btn")
+          .forEach(b => b.classList.remove("active"));
+
         btn.classList.add("active");
 
         let filtre = btn.textContent.trim();
+
         document.querySelectorAll(".article-card").forEach(card => {
-          let theme = card.querySelector(".badge-theme").textContent.trim();
-          card.style.display = (filtre === "Tous" || theme === filtre) ? "block" : "none";
+          let theme = card.querySelector(".badge-theme")?.textContent?.trim();
+
+          card.style.display =
+            (filtre === "Tous" || theme === filtre) ? "block" : "none";
         });
       });
     });
 
-   
-
-    // BONUS 3 : Tri par popularité
+    // BONUS 3 : Tri par popularité (non utilisé)
     
   } catch (error) {
     console.error('Erreur lors de la lecture des données :', error);
