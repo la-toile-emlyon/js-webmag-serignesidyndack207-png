@@ -103,7 +103,7 @@ async function getData() {
           day: 'numeric', month: 'long', year: 'numeric'
         });
 
-        let card = `<div class="article-card">
+        let card = `<div class="article-card"> 
           <img src="${imgUrl}" alt="${article.title}">
           <span class="badge-theme nav-theme-btn active">${theme.nom}</span>
           <h3>${article.title}</h3>
@@ -168,6 +168,8 @@ async function getData() {
         });
       });
     });
+
+   
 
     // BONUS 3 : Tri par popularité
     
