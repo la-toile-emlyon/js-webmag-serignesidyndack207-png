@@ -369,3 +369,9 @@ p  { color: var(--text-muted); line-height: 1.7; }
    font-size: .85rem;
 }
 .footer p { color: rgba(255,255,255,.3); margin: 0; }
+
+#logo-journal {
+   width: 100px;
+   height: auto;
+   filter: brightness(0) invert(1);
+}
