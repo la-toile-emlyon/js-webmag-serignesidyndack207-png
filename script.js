@@ -1,12 +1,12 @@
 // =============================================
 // CLÉ API UNSPLASH
 // =============================================
-const UNSPLASH_KEY = 'iJxf3ZzyE4YKM0uoBX4887ubvuYw_6KdpDEQOz6uMyE';
-
+let UNSPLASH_KEY = 'iJxf3ZzyE4YKM0uoBX4887ubvuYw_6KdpDEQOz6uMyE';
+let NEWS_DISABLED = true;
 // =============================================
 // CLÉ API NEWSAPI
 // =============================================
-const NEWS_KEY = '6e883ccd98dc4e159c84acdefb7be634';
+let NEWS_KEY = '6e883ccd98dc4e159c84acdefb7be634';
 
 // Fonction pour récupérer une image Unsplash selon un thème
 async function getImage(theme) {
@@ -24,15 +24,15 @@ async function getImage(theme) {
 
 // Fonction pour récupérer les articles NewsAPI selon un thème
 async function getNewsArticles(theme) {
+  if (NEWS_DISABLED) return [];
+
   try {
     const res = await fetch(
       `https://newsapi.org/v2/everything?q=${encodeURIComponent(theme)}&language=fr&sortBy=publishedAt&pageSize=5&apiKey=${NEWS_KEY}`
     );
 
     const data = await res.json();
-    console.log(data);
 
-    // ✔ FIX IMPORTANT : sécurité API
     if (!data || data.status !== "ok") {
       return [];
     }
@@ -105,33 +105,15 @@ async function getData() {
     let articleGrid = document.getElementById('articles-grid');
 
     for (const theme of themes) {
-      let newsArticles = await getNewsArticles(theme.nom);
+  let card = `<div class="article-card"> 
+    <img src="${await getImage(theme.nom)}">
+    <span class="badge-theme nav-theme-btn active">${theme.nom}</span>
+    <h3>Article sur ${theme.nom}</h3>
+    <span class="date"></span>
+  </div>`;
 
-      for (const article of newsArticles) {
-
-        // ✔ FIX IMAGE SAFE (sans changer logique)
-        let imgUrl = (article.urlToImage && article.urlToImage !== "")
-          ? article.urlToImage
-          : await getImage(theme.nom);
-
-        let date = article.publishedAt
-          ? new Date(article.publishedAt).toLocaleDateString('fr-FR', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric'
-            })
-          : "";
-
-        let card = `<div class="article-card"> 
-          <img src="${imgUrl}" alt="${article.title}">
-          <span class="badge-theme nav-theme-btn active">${theme.nom}</span>
-          <h3>${article.title}</h3>
-          <span class="date">${date}</span>
-        </div>`;
-
-        articleGrid.insertAdjacentHTML('beforeend', card);
-      }
-    }
+  articleGrid.insertAdjacentHTML('beforeend', card);
+}
 
     // TODO 5: REMPLIR LES THEMES
     let themesList = document.getElementById('themes-list');
