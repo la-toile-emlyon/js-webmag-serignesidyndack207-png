@@ -88,32 +88,37 @@ async function getData() {
 
     // TODO 3: REMPLIR L'ARTICLE PRINCIPAL (avec image Unsplash)
     let articlePrincipal = data.journal.articlePrincipal;
-    let imgPrincipal = await getImage(articlePrincipal.theme);
+  
 
     let articlePrincipalElement = document.querySelector("#article-principal");
     articlePrincipalElement.innerHTML = `
-      <img src="${imgPrincipal}" alt="${articlePrincipal.titre}">
+      <img src="${articlePrincipal.image}" alt="${articlePrincipal.titre}">
       <div class="article-content">
-        <span class="badge-theme">${articlePrincipal.theme}</span>
+        <p><span class="badge-theme">${articlePrincipal.theme}</span></p>
         <h1>${articlePrincipal.titre}</h1>
         <p>${articlePrincipal.description}</p>
         <span class="date">${articlePrincipal.date}</span>
       </div>
     `;
 
-    // TODO 4: REMPLIR LA GRILLE D'ARTICLES (avec NewsAPI + images Unsplash)
-    let articleGrid = document.getElementById('articles-grid');
+   
 
-    for (const theme of themes) {
-  let card = `<div class="article-card"> 
-    <img src="${await getImage(theme.nom)}">
-    <span class="badge-theme nav-theme-btn active">${theme.nom}</span>
-    <h3>Article sur ${theme.nom}</h3>
-    <span class="date"></span>
+// TODO 4: REMPLIR LA GRILLE D'ARTICLES 
+let articleGrid = document.getElementById('articles-grid');
+let journal = data.journal;
+journal.articles.forEach(article => {
+  let card = `<div class="article-card">
+    
+    <img src="${article.image}" alt="${article.titre}">
+    <p><span class="badge-theme">${article.theme}</span></p>
+    <h3>${article.titre}</h3>
+    <p class="date">${article.date}</p>
+    
   </div>`;
 
   articleGrid.insertAdjacentHTML('beforeend', card);
-}
+});
+  
 
     // TODO 5: REMPLIR LES THEMES
     let themesList = document.getElementById('themes-list');

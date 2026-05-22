@@ -173,7 +173,7 @@ p  { color: var(--text-muted); line-height: 1.7; }
 .read-article-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
 /* ── Badges & dates ── */
-.theme-badge {
+.badge-theme {
    display: inline-block;
    background: var(--accent);
    color: var(--text-white);
@@ -184,6 +184,11 @@ p  { color: var(--text-muted); line-height: 1.7; }
    letter-spacing: 1px;
    border-radius: 999px;
    margin-bottom: 6px;
+   border: none;
+   cursor: default;
+   font-family: inherit;
+   appearance: none;
+   -webkit-appearance: none;
 }
 .date {
    display: inline-block;
